@@ -11,15 +11,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Get ListView object from xml.
-        ListView eventListView = (ListView) findViewById(R.id.event_list);
-
-        // Initialize an adapter.
-        EventAdapter adapter = new EventAdapter(this);
-
-        // Assign adapter to ListView.
-        eventListView.setAdapter(adapter);
+        
     }
 
     /**
