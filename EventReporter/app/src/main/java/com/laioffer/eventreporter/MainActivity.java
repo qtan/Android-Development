@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EventFragment.OnItemSelectListener
+{
     private EventFragment mListFragment;
     private CommentFragment mGridFragment;
 
@@ -27,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.comment_container, mGridFragment).commit();
         }
 
+    }
+    @Override
+    public void onItemSelected(int position) {
+        mGridFragment.onItemSelected(position);
     }
 
     private boolean isTablet() {
