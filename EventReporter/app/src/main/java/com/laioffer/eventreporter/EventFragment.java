@@ -2,6 +2,7 @@ package com.laioffer.eventreporter;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.ListView;
  */
 public class EventFragment extends Fragment {
     OnItemSelectListener mCallback;
+    private ListView mListView;
 
     // Container Activity must implement this interface
     public interface OnItemSelectListener {
@@ -72,5 +74,15 @@ public class EventFragment extends Fragment {
 
 
     }
+    public void onItemSelected(int position){
+        for (int i = 0; i < mListView.getChildCount(); i++){
+            if (position == i) {
+                mListView.getChildAt(i).setBackgroundColor(Color.BLUE);
+            } else {
+                mListView.getChildAt(i).setBackgroundColor(Color.parseColor("#EEEEEE"));
+            }
+        }
+    }
+
 
 }

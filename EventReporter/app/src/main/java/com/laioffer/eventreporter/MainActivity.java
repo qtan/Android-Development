@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity implements EventFragment.OnItemSelectListener
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+public class MainActivity extends AppCompatActivity implements EventFragment.OnItemSelectListener, CommentFragment.OnItemSelectListener
 {
     private EventFragment mListFragment;
     private CommentFragment mGridFragment;
@@ -19,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements EventFragment.OnI
 
         //add list view
         mListFragment = new EventFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.event_container,     mListFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.event_container, mListFragment).commit();
 
 
         //add Gridview
@@ -27,6 +30,12 @@ public class MainActivity extends AppCompatActivity implements EventFragment.OnI
             mGridFragment = new CommentFragment();
             getSupportFragmentManager().beginTransaction().add(R.id.comment_container, mGridFragment).commit();
         }
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World!");
+
 
     }
     @Override
@@ -39,6 +48,11 @@ public class MainActivity extends AppCompatActivity implements EventFragment.OnI
                 Configuration.SCREENLAYOUT_SIZE_MASK) >=
                 Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
+    @Override
+    public void onCommentSelected(int position) {
+        mListFragment.onItemSelected(position);
+    }
+
 
 
 
@@ -55,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements EventFragment.OnI
                 "Event10", "Event11", "Event12"};
         return names;
     }
+
 
 
 }
